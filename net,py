@@ -1,0 +1,7 @@
+import requests
+
+resp = requests.get("https://v1.hitokoto.cn")
+data = resp.json()
+
+print(data["hitokoto"])
+print("——" + data["from"])
