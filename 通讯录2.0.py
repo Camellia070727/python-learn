@@ -15,8 +15,9 @@ while True:
     print("1.添加")
     print("2.查询")
     print("3.删除")
-    print("4.退出")
-    choice = input("请选择(1/2/3/4)")
+    print("4.修改")
+    print("5.退出")
+    choice = input("请选择(1/2/3/4/5)")
     if choice == "1":
         name = input("姓名：")
         phone = input("电话：")
@@ -36,5 +37,10 @@ while True:
         conn.commit()
         print("已删除")
     elif choice == "4":
+        name = input("改谁：")
+        new_phone = input("新电话：")
+        c.execute("UPDATE contacts SET phone = ? WHERE name = ?",(new_phone, name))
+        conn.commit()
+    elif choice == "5":
         print("再见")
         break
