@@ -1,12 +1,17 @@
 import requests
 from bs4 import BeautifulSoup
 
+headers = {"User-Agent": "Mozilla/5.0 (windows NT 10.0; Win64; x64)Applewebk/537.36"}
+
 all_quotes = []
+
+import time
 
 for page in range(1,11):
     url = f"https://quotes.toscrape.com/page/{page}/"
-    resp = requests.get(url)
+    resp = requests.get(url, headers)
     soup = BeautifulSoup(resp.text, "html.parser")
+    time.sleep(1)
 
     for q in soup.find_all("div",class_="quote"):
         text = q.find("span",class_="text").text
