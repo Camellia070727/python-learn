@@ -5,6 +5,7 @@ import time
 
 from openpyxl import Workbook
 wb = Workbook()
+count = 0
 ws = wb.active
 ws.append(["书名", "评分", "作者", "出版社", "出版年", "价格"])
 
@@ -41,7 +42,10 @@ for start in range(0, 250, 25):
         pub_year = body[-1].strip()
 
         ws.append([title, rating, author, publisher, pub_year, price])
+        count += 1
         print(f" {title} {rating}")
     time.sleep(1)
 
 wb.save("豆瓣图书Top250.xlsx")
+print(f"\n完成！共抓取 {count} 条数据")
+input("数据已保存至文件夹，按回车键退出...")
