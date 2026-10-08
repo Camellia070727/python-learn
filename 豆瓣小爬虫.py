@@ -15,7 +15,7 @@ for start in range(0, 250, 25):
     url = f"https://book.douban.com/top250?start={start}"
     resp = requests.get(url, headers=headers)
     soup = BeautifulSoup(resp.text, "html.parser")
-    print(f"--- 正在爬{start // 25+1}页 ---")
+    print(f"--- 正在爬第{start // 25+1}页 ---")
 
     for box in soup. find_all("tr", class_="item"):
         title = box.find("div", class_="pl2").find("a")["title"]
