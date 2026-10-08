@@ -14,6 +14,7 @@ for start in range(0, 250, 25):
     url = f"https://book.douban.com/top250?start={start}"
     resp = requests.get(url, headers=headers)
     soup = BeautifulSoup(resp.text, "html.parser")
+    print(f"--- 正在爬{start // 25+1}页 ---")
 
     for box in soup. find_all("tr", class_="item"):
         title = box.find("div", class_="pl2").find("a")["title"]
@@ -32,7 +33,7 @@ for start in range(0, 250, 25):
             body = parts
 
         author = body[0].strip()
-        
+
         if len(body) >= 3:
             publisher = body[-2].strip()
         else:
@@ -40,6 +41,7 @@ for start in range(0, 250, 25):
         pub_year = body[-1].strip()
 
         ws.append([title, rating, author, publisher, pub_year, price])
+        print(f" {title} {rating}")
     time.sleep(1)
 
 wb.save("豆瓣图书Top250.xlsx")
